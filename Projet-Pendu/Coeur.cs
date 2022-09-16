@@ -15,8 +15,6 @@ namespace Main
             console.WriteLine("ceci est un test");
             currentLogique.logique;
             currentAffichage.affichage;
-
-
         }
 
     }
