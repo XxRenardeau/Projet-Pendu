@@ -1,20 +1,22 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-public logique currentLogique;
-public affichage currentAffichage;
+using pendu;
 
-namespace Main
+
+namespace pendu
 {
-    class Main
+    class Coeur
     {
-        public void Main()
+
+        public logique currentLogique;
+        public affichages currentAffichage;
+        public Coeur()
         {
             currentLogique = new logique();
-            currentAffichage = new affichage();
-            console.WriteLine("ceci est un test");
-            currentLogique.logique;
-            currentAffichage.affichage;
+            currentAffichage = new affichages();
+            Console.WriteLine("ceci est un test");
+            currentLogique.MainLogique();
         }
 
     }

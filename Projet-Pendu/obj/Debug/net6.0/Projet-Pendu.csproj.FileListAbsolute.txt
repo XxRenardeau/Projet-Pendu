@@ -1,0 +1,15 @@
+C:\Users\paulm\Desktop\projetpendu\Projet-Pendu\Projet-Pendu\bin\Debug\net6.0\Projet-Pendu.exe
+C:\Users\paulm\Desktop\projetpendu\Projet-Pendu\Projet-Pendu\bin\Debug\net6.0\Projet-Pendu.deps.json
+C:\Users\paulm\Desktop\projetpendu\Projet-Pendu\Projet-Pendu\bin\Debug\net6.0\Projet-Pendu.runtimeconfig.json
+C:\Users\paulm\Desktop\projetpendu\Projet-Pendu\Projet-Pendu\bin\Debug\net6.0\Projet-Pendu.dll
+C:\Users\paulm\Desktop\projetpendu\Projet-Pendu\Projet-Pendu\bin\Debug\net6.0\Projet-Pendu.pdb
+C:\Users\paulm\Desktop\projetpendu\Projet-Pendu\Projet-Pendu\obj\Debug\net6.0\Projet-Pendu.csproj.AssemblyReference.cache
+C:\Users\paulm\Desktop\projetpendu\Projet-Pendu\Projet-Pendu\obj\Debug\net6.0\Projet-Pendu.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\paulm\Desktop\projetpendu\Projet-Pendu\Projet-Pendu\obj\Debug\net6.0\Projet-Pendu.AssemblyInfoInputs.cache
+C:\Users\paulm\Desktop\projetpendu\Projet-Pendu\Projet-Pendu\obj\Debug\net6.0\Projet-Pendu.AssemblyInfo.cs
+C:\Users\paulm\Desktop\projetpendu\Projet-Pendu\Projet-Pendu\obj\Debug\net6.0\Projet-Pendu.csproj.CoreCompileInputs.cache
+C:\Users\paulm\Desktop\projetpendu\Projet-Pendu\Projet-Pendu\obj\Debug\net6.0\Projet-Pendu.dll
+C:\Users\paulm\Desktop\projetpendu\Projet-Pendu\Projet-Pendu\obj\Debug\net6.0\refint\Projet-Pendu.dll
+C:\Users\paulm\Desktop\projetpendu\Projet-Pendu\Projet-Pendu\obj\Debug\net6.0\Projet-Pendu.pdb
+C:\Users\paulm\Desktop\projetpendu\Projet-Pendu\Projet-Pendu\obj\Debug\net6.0\Projet-Pendu.genruntimeconfig.cache
+C:\Users\paulm\Desktop\projetpendu\Projet-Pendu\Projet-Pendu\obj\Debug\net6.0\ref\Projet-Pendu.dll

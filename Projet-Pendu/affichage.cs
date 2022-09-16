@@ -1,19 +1,17 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-
-namespace affichage
-{
-
-    class affichage
+using pendu;
+namespace pendu{
+    class affichages
     {
 
         public void affichage()
         {
 
 
-            console.WriteLine("ceci est un test d'affichage");
-            console.WriteLine("**************************\n****** Bienvenue dans LA PANDAISON ******\n**************************");
+            Console.WriteLine("ceci est un test d'affichage");
+            Console.WriteLine("**************************\n****** Bienvenue dans LA PANDAISON ******\n**************************");
             
 
 

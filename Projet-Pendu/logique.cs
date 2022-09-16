@@ -1,46 +1,103 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using pendu;
 
-namespace logique
+namespace pendu
 {
 
-    class logique
+    public class logique
     {
-        public int TailleMot;
-        public string MotRandom;
+        public int TailleMot = 0;
+        public string MotRandom = "";
         public int NmbrLettresUtilise = 0;
-        public string InputUtilisateur;
+        public char InputUtilisateur = ' ';
+        public bool win = false;
+        public Mots currentMot;
 
-        public void logique()
+        public void MainLogique()
         {
+            MotRandom = RandomMot();
+            currentMot = new Mots(MotRandom);
             //prendre un mot random
-            console.WriteLine("ceci est un test de logique");
+            Console.WriteLine("ceci est un test de logique");
             //ici on definis la taille du mot qu'on utlise
-            TailleMot = mots.GetLength;
-            console.WriteLine("la taille du mot est" + TailleMot);
+            TailleMot = MotRandom.Length;
+            Console.WriteLine("la taille du mot est " + TailleMot);
+            Console.WriteLine("le mot est " + MotRandom);
+            Console.WriteLine("veulliez entrer une lettre");
 
-            if (IsAlphabetic) console.WriteLine("Veulliez entrer uniquement des lettres");
-            else
+            while (!win)
             {
-                //mettre ici le reste de la logique
-                //demander input utilisateur et comparer les lettres aux lettres du mot
-                //si faux ajouter 1 a NmbreLettresUtilise (si arrive a 10 = perdu) si vrai montrer la lettre
-                //faire en sorte de ne pas pouvoir jouer une lettre qui a dejé été utilisée (surement via un tableau)
+                InputUtilisateur = char.ToUpper(Console.ReadKey(true).KeyChar);
+                Console.WriteLine(InputUtilisateur);
+                if (!IsAlphabetic(InputUtilisateur)) Console.WriteLine("Veulliez entrer uniquement des lettres");
+                else
+                {
+                    Console.WriteLine(currentMot.Contient(InputUtilisateur));
+                    if (currentMot.Contient(InputUtilisateur))
+                    {
+                        LettresDevinees.Add(InputUtilisateur);
+                        Console.WriteLine("vous avez deviné " + LettresDevinees.Count + (" lettres différentes"));
 
+
+
+
+                    }
+                    else
+                    {return;
+                    }
+
+                    //mettre ici le reste de la logique
+                    //demander input utilisateur et comparer les lettres aux lettres du mot
+                    //si faux ajouter 1 a NmbreLettresUtilise (si arrive a 10 = perdu) si vrai montrer la lettre
+                    //faire en sorte de ne pas pouvoir jouer une lettre qui a dejé été utilisée (surement via un tableau)
+
+                }
             }
 
 
         }
-        public bool IsAlphabetic(string InputUtilisateur)
+        public bool IsAlphabetic(char InputUtilisateur)
         {
-            bool result = int.TryParse(InputUtilisateur);
-            return result;
+            return char.IsLetter(InputUtilisateur);
+
         }
-        string[] alphabet = new string[]("a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z");
+
+        public string RandomMot()
+        {
+            Random Rnd = new Random();
+            int RndIndex = Rnd.Next(0, mots.Length - 1);
+            string mot = mots[RndIndex];
+            return mot;
+
+        }
+        List<char> LettresDevinees = new List<char>();
+        string[] alphabet = new string[] { "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z" };
         //au cas ou on oublie l'alphabet (lol)
-        string[] mots = new string[]("voiture", "camion", "pizza", "ordinateur", "amnesique", "renard", "arbuste", "armure", "espadrille", "jonquille", "graduation", "justice", "cabinet", "karaoke", "question", "vitre", "platane", "lombaire", "canette", "jardinerie", "esperance", "caractere", "anguille", "niveau");
+        string[] mots = new string[] { "voiture", "camion", "pizza", "ordinateur", "amnesique", "renard", "arbuste", "armure", "espadrille", "jonquille", "graduation", "justice", "cabinet", "karaoke", "question", "vitre", "platane", "lombaire", "canette", "jardinerie", "esperance", "caractere", "anguille", "niveau" };
         //le tableau contient 24 mots
 
     }
+}
+public class Mots
+{
+    string mot;
+    public Mots(string mot)
+    {
+        this.mot = mot;
+        this.mot = this.mot.ToUpper();
+    }
+
+    public int NmbreLettresMot()
+    {
+        return mot.Length;
+    }
+    public bool Contient(char Lettre)
+    {
+        return mot.Contains(Lettre);
+    }
+
+
+
 }
