@@ -16,7 +16,7 @@ namespace pendu
         public void ShowErreurs()
         {
             string PenduErreur = pendu[LogiqueUI.Erreurs];
-            Console.WriteLine("CECI EST UN TEST DE ERREUR TU SAIT" + PenduErreur);
+            Console.WriteLine(PenduErreur);
             return;
 
         }
@@ -43,7 +43,7 @@ namespace pendu
             string LettresJouees = string.Empty;
             for (int i = 0; i < LogiqueUI.AllInput.Count; i++)
             {
-                LettresJouees += LogiqueUI.AllInput[i]+ ",";
+                LettresJouees += LogiqueUI.AllInput[i] + ",";
             }
             Console.WriteLine(LettresJouees);
 
@@ -61,16 +61,16 @@ namespace pendu
             Console.WriteLine("\n _      ______   _____  ______ _   _ _____  _    _ \n| |    |  ____| |  __ \\|  ____| \\ | |  __ \\| |  | |\n| |    | |__    | |__) | |__  |  \\| | |  | | |  | |\n| |    |  __|   |  ___/|  __| | . ` | |  | | |  | |\n| |____| |____  | |    | |____| |\\  | |__| | |__| |\n|______|______| |_|    |______|_| \\_|_____/ \\____/ ");
         }
 
-        string[] pendu = new string[] { "stade initial",
-            "premier stage"
-        , "deuxieme stage",
-         "troisieme stage",
-          "quatrieme stage",
-           "cinquieme stage",
-            "sixieme stage",
-            "septieme stage",
-            "huitieme stage",
-             "neuvieme stage",
+        string[] pendu = new string[] { "STADE INITIAL",
+            "\n  +---+\n  |   |\n      |\n      |\n      |\n      |"
+        , "\n  +---+\n  |   |\n      |\n      |\n      |\n      |",
+         "\n  +---+\n  |   |\n      |\n      |\n      |\n      |",
+          "\n  +---+\n  |   |\n      |\n      |\n      |\n      |",
+           "\n  +---+\n  |   |\n  O   |\n      |\n      |\n      |",
+            "\n  +---+\n  |   |\n  O   |\n  |   |\n      |\n      |",
+            "\n  +---+\n  |   |\n  O   |\n /|   |\n      |\n      |",
+            "\n  +---+\n  |   |\n  O   |\n /|\\  |\n      |\n      |",
+             "\n  +---+\n  |   |\n  O   |\n /|\\  |\n /    |\n      |",
               "\n  +---+\n  |   |\n  O   |\n /|\\  |\n / \\  |\n      |" };
 
 
@@ -84,45 +84,33 @@ namespace pendu
 
 
 /*
-  +---+
-  |   |
-      |
-      |
-      |
-      |
 
-  +---+
-  |   |
-  O   |
-      |
-      |
-      |
+\n  +---+
+\n  |   |
+\n      |
+\n      |
+\n      |
+\n      |      
+\n  +---+
+\n  |   |
+\n      |
+\n      |
+\n      |
+\n      |
+\n  +---+
+\n  |   |
+\n      |
+\n      |
+\n      |
+\n      |
+            
 
-  +---+
-  |   |
-  O   |
-  |   |
-      |
-      |
 
-  +---+
-  |   |
-  O   |
- /|   |
-      |
-      |
 
-  +---+
-  |   |
-  O   |
- /|\  |
-      |
-      |
 
-  +---+
-  |   |
-  O   |
- /|\  |
- /    |
-      |*/
+
+
+
+
+*/
 
