@@ -20,20 +20,7 @@ namespace pendu
         public affichages currentAffichage;
         public void MainLogique()
         {
-            currentAffichage = new affichages(this);
-            //currentAffichage.affichage();
-            MotRandom = RandomMot();
-            currentMot = new Mots(MotRandom);
-            //prendre un mot random
-            //Console.WriteLine("ceci est un test de logique");
-            //ici on definis la taille du mot qu'on utlise
-            TailleMot = MotRandom.Length;
-            /*Console.WriteLine("la taille du mot est " + TailleMot);
-            Console.WriteLine("le mot est " + MotRandom);*/
-            currentAffichage.GameUI();
-            Console.WriteLine("veulliez entrer une lettre");
-            LettresDansMot.AddRange(MotRandom.ToUpper());
-            Console.WriteLine(String.Join(", ", LettresDansMot));
+            StartResart();
             while (!win)
             {
 
@@ -61,9 +48,28 @@ namespace pendu
                         {
                             currentAffichage.GameUI();
                             win = true;
-                            Console.WriteLine("bien joué");
-                            break;
-                            //demander si le joeur veut rejouer
+                            currentAffichage.GG();
+                            LettresDansMot.Clear();
+                            LettresDevinees.Clear();
+                            LettresFausses.Clear();
+                            AllInput.Clear();
+                            InputUtilisateur = char.ToUpper(Console.ReadKey(true).KeyChar);
+                            if (InputUtilisateur == 'Y')
+                            {
+                                win = false;
+                                StartResart();
+                            }
+                            else if (InputUtilisateur == 'N')
+                            {
+                                currentAffichage.Bye();
+                                break;
+                            }
+                            else
+                            {
+                                currentAffichage.Bye();
+                                break;
+                            }
+
 
                         }
                     }
@@ -76,15 +82,9 @@ namespace pendu
                         currentAffichage.GameUI();
                         if (ErreurMax - Erreurs == zero)
                         {
-                            Console.WriteLine("t mor lol");
+                            currentAffichage.GamePerdu();
                             return;
 
-                        }
-                        else
-                        {
-
-                            //currentAffichage.Show();
-                            //Console.WriteLine("vous avez fait " +  + (" "));
                         }
 
                     }
@@ -118,7 +118,27 @@ namespace pendu
         string[] mots = new string[] { "voiture", "camion", "pizza", "ordinateur", "amnesique", "renard", "arbuste", "armure", "espadrille", "jonquille", "graduation", "justice", "cabinet", "karaoke", "question", "vitre", "platane", "lombaire", "canette", "jardinerie", "esperance", "caractere", "anguille", "niveau" };
         //le tableau contient 24 mots
 
+
+        public void StartResart()
+        {
+            currentAffichage = new affichages(this);
+            //currentAffichage.affichage();
+            MotRandom = RandomMot();
+            currentMot = new Mots(MotRandom);
+            //prendre un mot random
+            //Console.WriteLine("ceci est un test de logique");
+            //ici on definis la taille du mot qu'on utlise
+            TailleMot = MotRandom.Length;
+            /*Console.WriteLine("la taille du mot est " + TailleMot);
+            Console.WriteLine("le mot est " + MotRandom);*/
+            currentAffichage.GameUI();
+            LettresDansMot.AddRange(MotRandom.ToUpper());
+            Console.WriteLine(String.Join(", ", LettresDansMot));
+
+
+        }
     }
+
 }
 public class Mots
 {
