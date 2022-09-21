@@ -20,7 +20,9 @@ namespace pendu
         public affichages currentAffichage;
         public void MainLogique()
         {
+            Erreurs = 0;
             StartResart();
+            currentAffichage.GameUI();
             while (!win)
             {
 
@@ -48,6 +50,7 @@ namespace pendu
                         {
                             currentAffichage.GameUI();
                             win = true;
+                            Erreurs = 0;
                             currentAffichage.GG();
                             LettresDansMot.Clear();
                             LettresDevinees.Clear();
@@ -57,6 +60,7 @@ namespace pendu
                             if (InputUtilisateur == 'Y')
                             {
                                 win = false;
+                                
                                 StartResart();
                             }
                             else if (InputUtilisateur == 'N')
@@ -82,8 +86,32 @@ namespace pendu
                         currentAffichage.GameUI();
                         if (ErreurMax - Erreurs == zero)
                         {
+                            currentAffichage.GameUI();
+                            win = true;
+                            Erreurs = 0;
                             currentAffichage.GamePerdu();
-                            return;
+                            LettresDansMot.Clear();
+                            LettresDevinees.Clear();
+                            LettresFausses.Clear();
+                            AllInput.Clear();
+                            InputUtilisateur = char.ToUpper(Console.ReadKey(true).KeyChar);
+                            if (InputUtilisateur == 'Y')
+                            {
+                                win = false;
+                                
+                                StartResart();
+                            }
+                            else if (InputUtilisateur == 'N')
+                            {
+                                currentAffichage.Bye();
+                                break;
+                            }
+                            else
+                            {
+                                currentAffichage.Bye();
+                                break;
+                            }
+
 
                         }
 

@@ -60,8 +60,9 @@ namespace pendu
         public void GamePerdu()
         {
             Console.Clear();
-            ShowErreurs();
+            //ShowErreurs();
             Lose();
+            GameReplay();
         }
         public void GameReplay()
         {
