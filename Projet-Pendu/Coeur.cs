@@ -17,6 +17,8 @@ namespace pendu
             currentAffichage = new affichages();
             Console.WriteLine("ceci est un test");
             currentLogique.MainLogique();
+            
+            
         }
 
     }

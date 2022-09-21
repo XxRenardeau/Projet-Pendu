@@ -13,8 +13,8 @@ namespace pendu
         public int NmbrLettresUtilise = 0;
         public char InputUtilisateur = ' ';
         public bool win = false;
-        public int Erreurs = 0;
-        public int ErreursMax = 10;
+        public int Erreurs = -1;
+        public int ErreursMax = 9;
         public int zero = 0;
         public Mots currentMot;
         public void MainLogique()
@@ -28,38 +28,48 @@ namespace pendu
             Console.WriteLine("la taille du mot est " + TailleMot);
             Console.WriteLine("le mot est " + MotRandom);
             Console.WriteLine("veulliez entrer une lettre");
+            LettresDansMot.AddRange(MotRandom.ToUpper());
+            int LettresDansMotNombreValue = LettresDansMot.Count();
+            Console.WriteLine(String.Join(", ", LettresDansMot));
             while (!win)
-            {
-
+            {//;
 
                 InputUtilisateur = char.ToUpper(Console.ReadKey(true).KeyChar);
                 Console.WriteLine(InputUtilisateur);
                 if (!IsAlphabetic(InputUtilisateur)) Console.WriteLine("Veulliez entrer uniquement des lettres");
                 else
                 {
+
+
                     Console.WriteLine(currentMot.Contient(InputUtilisateur));
-                    if (currentMot.Contient(InputUtilisateur))
+                    if (AllInput.Contains(InputUtilisateur))
+                    {
+                        Console.WriteLine("VEULLIEZ ENTRER DES LETTRES QUE VOUS NAVEZ PAS DEJA DEVINE");
+                    }
+                    else if (currentMot.Contient(InputUtilisateur))
                     {
                         LettresDevinees.Add(InputUtilisateur);
+                        AllInput.Add(InputUtilisateur);
                         Console.WriteLine("");
-                        Console.WriteLine("vous avez deviné " + LettresDevinees.Count + (" lettres différentes"));
-                        /*if (LettresDevinees.Count = TailleMot)
+                        //Console.WriteLine("vous avez deviné " + LettresDevinees.Count + (" lettres différentes"));
+                        while (LettresDansMot.Contains(InputUtilisateur)) { LettresDansMot.Remove(InputUtilisateur); }
+                        Console.WriteLine(String.Join(", ", LettresDansMot));
+                        if (LettresDansMot.Count() == zero)
                         {
+                            win = true;
+                            Console.WriteLine("bien joué");
 
-                            Console.WriteLine("gagné ? pour l'instant on sait pas alors hein");
-                            return;
                         }
                         else
                         {
-                            return;
-                        }*/
 
-
-
-
+                        }
                     }
+
                     else
                     {
+                        LettresFausses.Add(InputUtilisateur);
+                        AllInput.Add(InputUtilisateur);
                         Erreurs++;
                         if (ErreursMax - Erreurs == zero)
                         {
@@ -69,18 +79,14 @@ namespace pendu
                         }
                         else
                         {
+
+                            //currentAffichage.ShowErreurs(Erreurs);
                             Console.WriteLine("vous avez fait " + Erreurs + (" erreurs"));
                         }
 
                     }
 
-                    //mettre ici le reste de la logique
-                    //demander input utilisateur et comparer les lettres aux lettres du mot
-                    //si faux ajouter 1 a NmbreLettresUtilise (si arrive a 10 = perdu) si vrai montrer la lettre
-                    //faire en sorte de ne pas pouvoir jouer une lettre qui a dejé été utilisée (surement via un tableau)
-
                 }
-
             }
 
 
@@ -102,6 +108,8 @@ namespace pendu
         }
         List<char> LettresDansMot = new List<char>();
         List<char> LettresDevinees = new List<char>();
+        List<char> LettresFausses = new List<char>();
+        List<char> AllInput = new List<char>();
         string[] alphabet = new string[] { "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z" };
         //au cas ou on oublie l'alphabet (lol)
         string[] mots = new string[] { "voiture", "camion", "pizza", "ordinateur", "amnesique", "renard", "arbuste", "armure", "espadrille", "jonquille", "graduation", "justice", "cabinet", "karaoke", "question", "vitre", "platane", "lombaire", "canette", "jardinerie", "esperance", "caractere", "anguille", "niveau" };
@@ -112,6 +120,7 @@ namespace pendu
 public class Mots
 {
     string mot;
+    char LtrsDansMot;
     public Mots(string mot)
     {
         this.mot = mot;
@@ -126,14 +135,5 @@ public class Mots
     {
         return mot.Contains(Lettre);
     }
-    /*public string LettresContenue(string mot)
-    {
-
-        this.mot = mot;
-        //la faut une fonction qui me dit chaque lettre contenue
-        //mettre le resultat dans une liste
-    }*/
-
-
 
 }
