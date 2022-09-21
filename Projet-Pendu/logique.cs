@@ -13,8 +13,10 @@ namespace pendu
         public int NmbrLettresUtilise = 0;
         public char InputUtilisateur = ' ';
         public bool win = false;
+        public int Erreurs = 0;
+        public int ErreursMax = 10;
+        public int zero = 0;
         public Mots currentMot;
-
         public void MainLogique()
         {
             MotRandom = RandomMot();
@@ -26,9 +28,10 @@ namespace pendu
             Console.WriteLine("la taille du mot est " + TailleMot);
             Console.WriteLine("le mot est " + MotRandom);
             Console.WriteLine("veulliez entrer une lettre");
-
             while (!win)
             {
+
+
                 InputUtilisateur = char.ToUpper(Console.ReadKey(true).KeyChar);
                 Console.WriteLine(InputUtilisateur);
                 if (!IsAlphabetic(InputUtilisateur)) Console.WriteLine("Veulliez entrer uniquement des lettres");
@@ -38,14 +41,37 @@ namespace pendu
                     if (currentMot.Contient(InputUtilisateur))
                     {
                         LettresDevinees.Add(InputUtilisateur);
+                        Console.WriteLine("");
                         Console.WriteLine("vous avez deviné " + LettresDevinees.Count + (" lettres différentes"));
+                        /*if (LettresDevinees.Count = TailleMot)
+                        {
+
+                            Console.WriteLine("gagné ? pour l'instant on sait pas alors hein");
+                            return;
+                        }
+                        else
+                        {
+                            return;
+                        }*/
 
 
 
 
                     }
                     else
-                    {return;
+                    {
+                        Erreurs++;
+                        if (ErreursMax - Erreurs == zero)
+                        {
+                            Console.WriteLine("t mor lol");
+                            return;
+
+                        }
+                        else
+                        {
+                            Console.WriteLine("vous avez fait " + Erreurs + (" erreurs"));
+                        }
+
                     }
 
                     //mettre ici le reste de la logique
@@ -54,10 +80,12 @@ namespace pendu
                     //faire en sorte de ne pas pouvoir jouer une lettre qui a dejé été utilisée (surement via un tableau)
 
                 }
+
             }
 
 
         }
+
         public bool IsAlphabetic(char InputUtilisateur)
         {
             return char.IsLetter(InputUtilisateur);
@@ -72,6 +100,7 @@ namespace pendu
             return mot;
 
         }
+        List<char> LettresDansMot = new List<char>();
         List<char> LettresDevinees = new List<char>();
         string[] alphabet = new string[] { "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z" };
         //au cas ou on oublie l'alphabet (lol)
@@ -97,6 +126,13 @@ public class Mots
     {
         return mot.Contains(Lettre);
     }
+    /*public string LettresContenue(string mot)
+    {
+
+        this.mot = mot;
+        //la faut une fonction qui me dit chaque lettre contenue
+        //mettre le resultat dans une liste
+    }*/
 
 
 
