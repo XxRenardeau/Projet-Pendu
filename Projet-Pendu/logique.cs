@@ -13,55 +13,57 @@ namespace pendu
         public int NmbrLettresUtilise = 0;
         public char InputUtilisateur = ' ';
         public bool win = false;
-        public int Erreurs = -1;
-        public int ErreursMax = 9;
+        public int Erreurs = 0;
+        public int ErreurMax = 10;
         public int zero = 0;
         public Mots currentMot;
+        public affichages currentAffichage;
         public void MainLogique()
         {
+            currentAffichage = new affichages(this);
+            //currentAffichage.affichage();
             MotRandom = RandomMot();
             currentMot = new Mots(MotRandom);
             //prendre un mot random
-            Console.WriteLine("ceci est un test de logique");
+            //Console.WriteLine("ceci est un test de logique");
             //ici on definis la taille du mot qu'on utlise
             TailleMot = MotRandom.Length;
-            Console.WriteLine("la taille du mot est " + TailleMot);
-            Console.WriteLine("le mot est " + MotRandom);
+            /*Console.WriteLine("la taille du mot est " + TailleMot);
+            Console.WriteLine("le mot est " + MotRandom);*/
+            currentAffichage.GameUI();
             Console.WriteLine("veulliez entrer une lettre");
             LettresDansMot.AddRange(MotRandom.ToUpper());
-            int LettresDansMotNombreValue = LettresDansMot.Count();
             Console.WriteLine(String.Join(", ", LettresDansMot));
             while (!win)
-            {//;
+            {
 
+                currentAffichage.GameUI();
                 InputUtilisateur = char.ToUpper(Console.ReadKey(true).KeyChar);
                 Console.WriteLine(InputUtilisateur);
+                currentAffichage.GameUI();
                 if (!IsAlphabetic(InputUtilisateur)) Console.WriteLine("Veulliez entrer uniquement des lettres");
                 else
                 {
-
-
-                    Console.WriteLine(currentMot.Contient(InputUtilisateur));
+                    //Console.WriteLine(currentMot.Contient(InputUtilisateur));
                     if (AllInput.Contains(InputUtilisateur))
                     {
+                        currentAffichage.GameUI();
                         Console.WriteLine("VEULLIEZ ENTRER DES LETTRES QUE VOUS NAVEZ PAS DEJA DEVINE");
                     }
                     else if (currentMot.Contient(InputUtilisateur))
                     {
                         LettresDevinees.Add(InputUtilisateur);
                         AllInput.Add(InputUtilisateur);
-                        Console.WriteLine("");
                         //Console.WriteLine("vous avez deviné " + LettresDevinees.Count + (" lettres différentes"));
                         while (LettresDansMot.Contains(InputUtilisateur)) { LettresDansMot.Remove(InputUtilisateur); }
                         Console.WriteLine(String.Join(", ", LettresDansMot));
                         if (LettresDansMot.Count() == zero)
                         {
+                            currentAffichage.GameUI();
                             win = true;
                             Console.WriteLine("bien joué");
-
-                        }
-                        else
-                        {
+                            break;
+                            //demander si le joeur veut rejouer
 
                         }
                     }
@@ -71,7 +73,8 @@ namespace pendu
                         LettresFausses.Add(InputUtilisateur);
                         AllInput.Add(InputUtilisateur);
                         Erreurs++;
-                        if (ErreursMax - Erreurs == zero)
+                        currentAffichage.GameUI();
+                        if (ErreurMax - Erreurs == zero)
                         {
                             Console.WriteLine("t mor lol");
                             return;
@@ -80,8 +83,8 @@ namespace pendu
                         else
                         {
 
-                            //currentAffichage.ShowErreurs(Erreurs);
-                            Console.WriteLine("vous avez fait " + Erreurs + (" erreurs"));
+                            //currentAffichage.Show();
+                            //Console.WriteLine("vous avez fait " +  + (" "));
                         }
 
                     }
@@ -107,9 +110,9 @@ namespace pendu
 
         }
         List<char> LettresDansMot = new List<char>();
-        List<char> LettresDevinees = new List<char>();
+        public List<char> LettresDevinees = new List<char>();
         List<char> LettresFausses = new List<char>();
-        List<char> AllInput = new List<char>();
+        public List<char> AllInput = new List<char>();
         string[] alphabet = new string[] { "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z" };
         //au cas ou on oublie l'alphabet (lol)
         string[] mots = new string[] { "voiture", "camion", "pizza", "ordinateur", "amnesique", "renard", "arbuste", "armure", "espadrille", "jonquille", "graduation", "justice", "cabinet", "karaoke", "question", "vitre", "platane", "lombaire", "canette", "jardinerie", "esperance", "caractere", "anguille", "niveau" };
@@ -134,6 +137,11 @@ public class Mots
     public bool Contient(char Lettre)
     {
         return mot.Contains(Lettre);
+    }
+    public char LettreIndex(int index)
+    {
+        return mot[index];
+
     }
 
 }
