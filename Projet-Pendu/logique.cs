@@ -26,28 +26,27 @@ namespace pendu
             while (!win)
             {
 
+
                 currentAffichage.GameUI();
-                InputUtilisateur = char.ToUpper(Console.ReadKey(true).KeyChar);
+                InputUtilisateur = char.ToUpper(Console.ReadKey(true).KeyChar); //demande l'input utilisateur en format char et le convertis en majuscule
                 Console.WriteLine(InputUtilisateur);
                 currentAffichage.GameUI();
-                if (!IsAlphabetic(InputUtilisateur)) Console.WriteLine("Veulliez entrer uniquement des lettres");
+                if (!IsAlphabetic(InputUtilisateur)) currentAffichage.NotAlphabetic(); //verifie si la saisie est alphabetique et si elle ne l'est pas , met un message d'erreur
                 else
                 {
-                    //Console.WriteLine(currentMot.Contient(InputUtilisateur));
                     if (AllInput.Contains(InputUtilisateur))
                     {
-                        currentAffichage.GameUI();
-                        Console.WriteLine("VEULLIEZ ENTRER DES LETTRES QUE VOUS NAVEZ PAS DEJA DEVINE");
+                        currentAffichage.AlreadyGuessed(); //verifie si la saisie n'as pas déja été soumise , si elle l'as été , met un message d'erreur
                     }
                     else if (currentMot.Contient(InputUtilisateur))
                     {
                         LettresDevinees.Add(InputUtilisateur);
                         AllInput.Add(InputUtilisateur);
-                        //Console.WriteLine("vous avez deviné " + LettresDevinees.Count + (" lettres différentes"));
-                        while (LettresDansMot.Contains(InputUtilisateur)) { LettresDansMot.Remove(InputUtilisateur); }
+                        while (LettresDansMot.Contains(InputUtilisateur)) { LettresDansMot.Remove(InputUtilisateur); } //boucle qui boucle jusqua que toutes les lettres devinée dans le mot soient enlevée des lettres a deviner
                         Console.WriteLine(String.Join(", ", LettresDansMot));
                         if (LettresDansMot.Count() == zero)
                         {
+                            //reinitiallise l'affichage , casse la boucle de jeu et demande a l'utilisateur si il veut rejouer
                             currentAffichage.GameUI();
                             win = true;
                             Erreurs = 0;
@@ -60,7 +59,7 @@ namespace pendu
                             if (InputUtilisateur == 'Y')
                             {
                                 win = false;
-                                
+
                                 StartResart();
                             }
                             else if (InputUtilisateur == 'N')
@@ -86,6 +85,7 @@ namespace pendu
                         currentAffichage.GameUI();
                         if (ErreurMax - Erreurs == zero)
                         {
+                            //reinitiallise l'affichage , casse la boucle de jeu et demande a l'utilisateur si il veut rejouer
                             currentAffichage.GameUI();
                             win = true;
                             Erreurs = 0;
@@ -98,7 +98,7 @@ namespace pendu
                             if (InputUtilisateur == 'Y')
                             {
                                 win = false;
-                                
+
                                 StartResart();
                             }
                             else if (InputUtilisateur == 'N')
@@ -125,12 +125,14 @@ namespace pendu
 
         public bool IsAlphabetic(char InputUtilisateur)
         {
+            //cette fonction regarde si l'input utilisateur est une lettre (créé une erreur si l'input n'est pas une lettre)
             return char.IsLetter(InputUtilisateur);
 
         }
 
         public string RandomMot()
         {
+            //cette fonction décide du mot a utiliser pour la partie
             Random Rnd = new Random();
             int RndIndex = Rnd.Next(0, mots.Length - 1);
             string mot = mots[RndIndex];
@@ -138,30 +140,26 @@ namespace pendu
 
         }
         List<char> LettresDansMot = new List<char>();
+        //cette liste contient les lettres décomposée du mot a deviner
         public List<char> LettresDevinees = new List<char>();
+        //cette liste conteitn toute les lettres bien devinées
         List<char> LettresFausses = new List<char>();
+        //cette liste contient toutes les lettres mal devinées
         public List<char> AllInput = new List<char>();
-        string[] alphabet = new string[] { "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z" };
-        //au cas ou on oublie l'alphabet (lol)
+        //cette liste contient tout les inputs qu'importe si ils sont vrai ou faux
         string[] mots = new string[] { "voiture", "camion", "pizza", "ordinateur", "amnesique", "renard", "arbuste", "armure", "espadrille", "jonquille", "graduation", "justice", "cabinet", "karaoke", "question", "vitre", "platane", "lombaire", "canette", "jardinerie", "esperance", "caractere", "anguille", "niveau" };
-        //le tableau contient 24 mots
+        //le tableau contient les mots qui sont dans le jeu , il contient 24 mots
 
 
-        public void StartResart()
+        public void StartResart() //fonction dirigeant le début de partie et etant appelée a la premiere partie ou a chaque nouvelle partie
         {
-            currentAffichage = new affichages(this);
-            //currentAffichage.affichage();
+            currentAffichage = new affichages(this); //créé une nouvelle instance de affichage pour generer une nouvelle interface
             MotRandom = RandomMot();
-            currentMot = new Mots(MotRandom);
-            //prendre un mot random
-            //Console.WriteLine("ceci est un test de logique");
-            //ici on definis la taille du mot qu'on utlise
+            currentMot = new Mots(MotRandom); //définit un nouveau mot a etre utilisé dans la logique
             TailleMot = MotRandom.Length;
-            /*Console.WriteLine("la taille du mot est " + TailleMot);
-            Console.WriteLine("le mot est " + MotRandom);*/
             currentAffichage.GameUI();
             LettresDansMot.AddRange(MotRandom.ToUpper());
-            Console.WriteLine(String.Join(", ", LettresDansMot));
+            Console.WriteLine(String.Join(", ", LettresDansMot)); //prend les lettres du mot random et les met sous format char dans la liste 
 
 
         }
@@ -171,22 +169,17 @@ namespace pendu
 public class Mots
 {
     string mot;
-    char LtrsDansMot;
-    public Mots(string mot)
+    public Mots(string mot) //met le mot en majuscule
     {
         this.mot = mot;
         this.mot = this.mot.ToUpper();
     }
 
-    public int NmbreLettresMot()
-    {
-        return mot.Length;
-    }
-    public bool Contient(char Lettre)
+    public bool Contient(char Lettre)//verifie si le mot contient une lettre spécifique
     {
         return mot.Contains(Lettre);
     }
-    public char LettreIndex(int index)
+    public char LettreIndex(int index) //utilisé dans l'affichage pour créé l'espace affichant les lettres
     {
         return mot[index];
 

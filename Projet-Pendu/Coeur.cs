@@ -14,7 +14,6 @@ namespace pendu
         public Coeur()
         {
             currentLogique = new logique();
-            //Console.WriteLine("ceci est un test");
             currentLogique.MainLogique();
             
             
