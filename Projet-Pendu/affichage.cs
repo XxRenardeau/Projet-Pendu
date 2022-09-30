@@ -13,6 +13,7 @@ namespace pendu
         {
             LogiqueUI = logique;
         }
+
         public void ShowErreurs() //permet d'afficher les différentes étapes du pendu (appelé dans la fonction GameUI)
         {
             string PenduErreur = pendu[LogiqueUI.Erreurs];
@@ -45,6 +46,7 @@ namespace pendu
             {
                 LettresJouees += LogiqueUI.AllInput[i] + ",";
             }
+            Console.WriteLine("LETTRES DEJA JOUEES");
             Console.WriteLine("\n \n" + LettresJouees);
 
         }
@@ -54,6 +56,7 @@ namespace pendu
             Titre();
             ShowLetters();
             LettresJouees();
+            Console.WriteLine("VEULLIEZ ENTRER UNE LETTRE");
             ShowErreurs();
 
         }

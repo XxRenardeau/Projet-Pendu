@@ -20,8 +20,9 @@ namespace pendu
         public affichages currentAffichage;
         public void MainLogique()
         {
-            Erreurs = 0;
             StartResart();
+            Erreurs = 0;
+
             currentAffichage.GameUI();
             while (!win)
             {
@@ -49,29 +50,9 @@ namespace pendu
                             //reinitiallise l'affichage , casse la boucle de jeu et demande a l'utilisateur si il veut rejouer
                             currentAffichage.GameUI();
                             win = true;
-                            Erreurs = 0;
                             currentAffichage.GG();
-                            LettresDansMot.Clear();
-                            LettresDevinees.Clear();
-                            LettresFausses.Clear();
-                            AllInput.Clear();
-                            InputUtilisateur = char.ToUpper(Console.ReadKey(true).KeyChar);
-                            if (InputUtilisateur == 'Y')
-                            {
-                                win = false;
-
-                                StartResart();
-                            }
-                            else if (InputUtilisateur == 'N')
-                            {
-                                currentAffichage.Bye();
-                                break;
-                            }
-                            else
-                            {
-                                currentAffichage.Bye();
-                                break;
-                            }
+                            Reset();
+                            ResartChoice();
 
 
                         }
@@ -88,29 +69,10 @@ namespace pendu
                             //reinitiallise l'affichage , casse la boucle de jeu et demande a l'utilisateur si il veut rejouer
                             currentAffichage.GameUI();
                             win = true;
-                            Erreurs = 0;
+                            Reset();
                             currentAffichage.GamePerdu();
-                            LettresDansMot.Clear();
-                            LettresDevinees.Clear();
-                            LettresFausses.Clear();
-                            AllInput.Clear();
-                            InputUtilisateur = char.ToUpper(Console.ReadKey(true).KeyChar);
-                            if (InputUtilisateur == 'Y')
-                            {
-                                win = false;
+                            ResartChoice();
 
-                                StartResart();
-                            }
-                            else if (InputUtilisateur == 'N')
-                            {
-                                currentAffichage.Bye();
-                                break;
-                            }
-                            else
-                            {
-                                currentAffichage.Bye();
-                                break;
-                            }
 
 
                         }
@@ -153,6 +115,9 @@ namespace pendu
 
         public void StartResart() //fonction dirigeant le début de partie et etant appelée a la premiere partie ou a chaque nouvelle partie
         {
+
+            if (currentAffichage == null) currentAffichage = new affichages(this);
+            Reset();
             currentAffichage = new affichages(this); //créé une nouvelle instance de affichage pour generer une nouvelle interface
             MotRandom = RandomMot();
             currentMot = new Mots(MotRandom); //définit un nouveau mot a etre utilisé dans la logique
@@ -163,26 +128,33 @@ namespace pendu
 
 
         }
-    }
+        public void Reset() //remet les listes a 0 et les erreurs a leur états de base
+        {
+            LettresDansMot.Clear();
+            LettresDevinees.Clear();
+            LettresFausses.Clear();
+            AllInput.Clear();
+            win = false;
+            Erreurs = 0;
+        }
+        public void ResartChoice() //demande a l'utilisateur si il veut rejouer
+        {
+            while (true)
+            {
+                InputUtilisateur = char.ToUpper(Console.ReadKey(true).KeyChar);
+                if (InputUtilisateur == 'Y')
+                {
+                    StartResart();
+                    break;
+                }
+                else if (InputUtilisateur == 'N')
+                {
+                    currentAffichage.Bye();
+                    break;
+                }
 
-}
-public class Mots
-{
-    string mot;
-    public Mots(string mot) //met le mot en majuscule
-    {
-        this.mot = mot;
-        this.mot = this.mot.ToUpper();
-    }
-
-    public bool Contient(char Lettre)//verifie si le mot contient une lettre spécifique
-    {
-        return mot.Contains(Lettre);
-    }
-    public char LettreIndex(int index) //utilisé dans l'affichage pour créé l'espace affichant les lettres
-    {
-        return mot[index];
+            }
+        }
 
     }
-
 }
