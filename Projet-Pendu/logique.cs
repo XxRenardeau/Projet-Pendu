@@ -53,6 +53,7 @@ namespace pendu
                             currentAffichage.GG();
                             Reset();
                             ResartChoice();
+                            return;
 
 
                         }
@@ -72,6 +73,7 @@ namespace pendu
                             Reset();
                             currentAffichage.GamePerdu();
                             ResartChoice();
+                            return;
 
 
 
@@ -149,7 +151,7 @@ namespace pendu
                 }
                 else if (InputUtilisateur == 'N')
                 {
-                    currentAffichage.Bye();
+                    currentAffichage.Bye(); //bug qui empeche de fermer le jeu
                     break;
                 }
 
